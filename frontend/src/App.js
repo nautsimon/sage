@@ -1,7 +1,10 @@
 /* global chrome */
 
 import React, { Component } from "react";
-import icon from "./imgs/actIco.png";
+
+import magAfter from "./imgs/magAfter.png";
+import magBefore from "./imgs/magBefore.png";
+import icon from "./imgs/logoFS.png";
 import "./App.css";
 
 class App extends Component {
@@ -48,21 +51,51 @@ class App extends Component {
   render() {
     return (
       <div className="modalBody">
-        <div className="row">
+        <div className="row paddingTop">
           <div className="left">
-            <img className="icon" src={icon} />
+            <img className="icon" src={icon} alt="icon" />
           </div>
           <div className="right">
-            <p className="titleText">
-              Act Now:{" "}
-              {/* <a className="titleLink" href={this.state.link} target="_blank">
-                {this.state.title}
-              </a> */}
-            </p>
-            <p className="genText">{this.state.percentage}</p>
-            <p className="genText">{this.state.link1}</p>
-            <p className="genText">{this.state.link2}</p>
-            <p className="genText">{this.state.link3}</p>
+            <div className="percentDiv">
+              <p className="percText">{this.state.percentage}%</p>
+            </div>
+          </div>
+        </div>
+        <div className="borderBottom">
+          <p className="genText paddingBottom">
+            Caution: Sage detected that there is a {this.state.percentage}%
+            probability that this site contains fallacious information.
+          </p>
+        </div>
+        <br />
+        <p className="genText negPad">
+          Here are some Sage verified articles that could provide more info on
+          this topic.
+        </p>
+        <div className="row">
+          <div className="tri">
+            <div className="liDiv">
+              <a href="https://https.pornhub.com/" className="hoverMag">
+                <img src={magAfter} className="magAfter" alt="magAfter" />
+              </a>
+              <img src={magBefore} className="magBefore" alt="magBefore" />
+            </div>
+          </div>
+          <div className="tri">
+            <div className="liDiv">
+              <a href="https://https.pornhub.com/" className="hoverMag">
+                <img src={magAfter} className="magAfter" alt="magAfter" />
+              </a>
+              <img src={magBefore} className="magBefore" alt="magBefore" />
+            </div>
+          </div>
+          <div className="tri">
+            <div className="liDiv">
+              <a href="https://https.pornhub.com/" className="hoverMag">
+                <img src={magAfter} className="magAfter" alt="magAfter" />
+              </a>
+              <img src={magBefore} className="magBefore" alt="magBefore" />
+            </div>
           </div>
         </div>
       </div>

@@ -1,25 +1,27 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
+  "name": "Act Now",
+  "manifest_version": 2,
+  "version": "0.0.1",
+  "description": "Facilitating social responsibility by connecting like minded individuals and to ways they may impact the real world",
+  "icons": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" },
+  "content_scripts": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "js": ["content.js"],
+      "matches": ["<all_urls>"]
     }
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background": {
+    "scripts": ["background.js"],
+    "run_at": "document_end"
+  },
+  "permissions": [
+    "contextMenus",
+    "webNavigation",
+    "storage",
+    "tabs",
+    "https://*/",
+    "https://*/*"
+  ],
+  "web_accessible_resources": ["*.html"],
+  "content_security_policy": "script-src 'self' 'sha256-qyGWG4JEekds/P6IxtRXQUc07idspPzEBd+Ub6CRxcM='; object-src 'self'"
 }

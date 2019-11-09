@@ -4,9 +4,10 @@ var contentTabId;
 // add organization logos to the banner
 var eventResp = {
   isEvent: "false",
-  title: "false",
-  description: "false",
-  link: "false"
+  percentage: "",
+  link1: "",
+  link2: "",
+  link3: ""
 };
 let getUrl = function() {
   return new Promise((resolve, reject) => {
@@ -17,8 +18,9 @@ let getUrl = function() {
   });
 };
 let getApi = function(pageUrl) {
+  var pageUrl = pageUrl;
   return new Promise(function(resolve, reject) {
-    var percentage = "94%";
+    var percentage = "94";
     var link1 = "https://pornhub.com";
     var link2 = "https://twitter.com";
     var link3 = "https://google.com";
@@ -29,6 +31,8 @@ let getApi = function(pageUrl) {
       link2: link2,
       link3: link3
     };
+    console.log(eventResp);
+    resolve(eventResp);
   });
   // var pageUrl = pageUrl;
   // var xhr = new XMLHttpRequest(),
@@ -69,8 +73,10 @@ let getApi = function(pageUrl) {
 };
 let sendMessage = function(msg, sender, result) {
   var response = eventResp;
+  console.log("sendmessagee:", response);
   return new Promise((resolve, reject) => {
     chrome.tabs.sendMessage(contentTabId, {
+      from: "background",
       percentage: response.percentage,
       event: response.isEvent,
       link1: response.link1,
