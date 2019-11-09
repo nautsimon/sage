@@ -1,12 +1,14 @@
-var title;
-var description;
-var link;
+var percentage;
+var link1;
+var link2;
+var link3;
 chrome.runtime.sendMessage({ from: "content" });
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
   if (msg.from == "background" && msg.event == "true") {
-    title = msg.title;
-    description = msg.description;
-    link = msg.link;
+    percentage = msg.percentage;
+    link1 = msg.link1;
+    link2 = msg.link2;
+    link3 = msg.link3;
     const eventDiv = document.createElement("div");
     eventDiv.id = "myDivIdAct";
     eventDiv.style.position = "fixed";
@@ -35,9 +37,10 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
   } else if (msg.from == "reactapp") {
     sendResponse({
       from: "content",
-      title: title,
-      description: description,
-      link: link
+      percentage: percentage,
+      link1: link1,
+      link2: link2,
+      link3: link3
     });
     document.getElementById("myDivIdAct").style.bottom = "0px";
   } else {

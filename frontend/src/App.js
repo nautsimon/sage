@@ -8,9 +8,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      description: "",
-      link: ""
+      percentage: "",
+      link1: "",
+      link2: "",
+      link3: ""
     };
   }
 
@@ -24,9 +25,10 @@ class App extends Component {
             response
           ) {
             var data = {
-              title: response.title,
-              description: response.description,
-              link: response.link
+              percentage: response.percentage,
+              link1: response.link1,
+              link2: response.link2,
+              link3: response.link3
             };
             resolve(data);
           });
@@ -35,9 +37,10 @@ class App extends Component {
     };
     getInfo().then(data => {
       return this.setState({
-        title: data.title,
-        description: data.description,
-        link: data.link
+        percentage: data.percentage,
+        link1: data.link1,
+        link2: data.link2,
+        link3: data.link3
       });
     });
   }
@@ -52,11 +55,14 @@ class App extends Component {
           <div className="right">
             <p className="titleText">
               Act Now:{" "}
-              <a className="titleLink" href={this.state.link} target="_blank">
+              {/* <a className="titleLink" href={this.state.link} target="_blank">
                 {this.state.title}
-              </a>
+              </a> */}
             </p>
-            <p className="genText">{this.state.description}</p>
+            <p className="genText">{this.state.percentage}</p>
+            <p className="genText">{this.state.link1}</p>
+            <p className="genText">{this.state.link2}</p>
+            <p className="genText">{this.state.link3}</p>
           </div>
         </div>
       </div>
