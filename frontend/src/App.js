@@ -75,7 +75,7 @@ class App extends Component {
         <div className="row">
           <div className="tri">
             <div className="liDiv">
-              <a href="https://https.pornhub.com/" className="hoverMag">
+              <a href={this.state.link1} target="_blank" className="hoverMag">
                 <img src={magAfter} className="magAfter" alt="magAfter" />
               </a>
               <img src={magBefore} className="magBefore" alt="magBefore" />
@@ -83,7 +83,7 @@ class App extends Component {
           </div>
           <div className="tri">
             <div className="liDiv">
-              <a href="https://https.pornhub.com/" className="hoverMag">
+              <a href={this.state.link2} target="_blank" className="hoverMag">
                 <img src={magAfter} className="magAfter" alt="magAfter" />
               </a>
               <img src={magBefore} className="magBefore" alt="magBefore" />
@@ -91,7 +91,7 @@ class App extends Component {
           </div>
           <div className="tri">
             <div className="liDiv">
-              <a href="https://https.pornhub.com/" className="hoverMag">
+              <a href={this.state.link3} target="_blank" className="hoverMag">
                 <img src={magAfter} className="magAfter" alt="magAfter" />
               </a>
               <img src={magBefore} className="magBefore" alt="magBefore" />

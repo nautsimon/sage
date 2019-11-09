@@ -9,7 +9,6 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     link1 = msg.link1;
     link2 = msg.link2;
     link3 = msg.link3;
-    console.log(percentage, link1, link2, link3);
     const eventDiv = document.createElement("div");
     eventDiv.id = "myDivIdAct";
     eventDiv.style.position = "fixed";
@@ -23,12 +22,12 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     eventDiv.style.height = "290px";
     eventDiv.style.opacity = "0.9";
     eventDiv.style.backgroundColor = "#1E1E1E";
-    eventDiv.innerHTML = `<iframe id="actNow"style="height:100%; width:100%"></iframe><link href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap" rel="stylesheet"/>
+    eventDiv.innerHTML = `<iframe id="sage"style="height:100%; width:100%"></iframe><link href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap" rel="stylesheet"/>
             <div-z style="position:absolute; top:12px; right:18px; ">  
                 <h6-z id="unique" style="cursor:pointer; transition: color 0.3s; font-family: 'Roboto', sans-serif; font-size: 30px; padding:0px; margin:0px; color:#ffffff;" onmouseout="this.style.color='#ffffff'" onmouseover="this.style.color='#ff6464'">x</h6-z>
             </div-z>`;
     document.body.appendChild(eventDiv);
-    const iframe = document.getElementById("actNow");
+    const iframe = document.getElementById("sage");
     iframe.src = chrome.extension.getURL("index.html");
     iframe.frameBorder = 0;
 
@@ -36,7 +35,6 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
       eventDiv.remove();
     });
   } else if (msg.from == "reactapp") {
-    console.log("sendmsadddddddddddddddessagee:");
     sendResponse({
       from: "content",
       percentage: percentage,
@@ -46,6 +44,6 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     });
     document.getElementById("myDivIdAct").style.bottom = "0px";
   } else {
-    console.log("Act Now App: Nothing Found");
+    console.log("Sage: Nothing Found");
   }
 });

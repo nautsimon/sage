@@ -18,62 +18,65 @@ let getUrl = function() {
   });
 };
 let getApi = function(pageUrl) {
-  var pageUrl = pageUrl;
-  return new Promise(function(resolve, reject) {
-    var percentage = "94";
-    var link1 = "https://pornhub.com";
-    var link2 = "https://twitter.com";
-    var link3 = "https://google.com";
-    eventResp = {
-      isEvent: "true",
-      percentage: percentage,
-      link1: link1,
-      link2: link2,
-      link3: link3
-    };
-    console.log(eventResp);
-    resolve(eventResp);
-  });
   // var pageUrl = pageUrl;
-  // var xhr = new XMLHttpRequest(),
-  //   method = "POST",
-  //   url = "http://actnow-chrome.herokuapp.com/getevent/";
   // return new Promise(function(resolve, reject) {
-  //   xhr.onreadystatechange = function() {
-  //     if (xhr.readyState === 4 && xhr.status === 200) {
-  //       response = JSON.parse(xhr.responseText);
-  //       if (response != "none") {
-  //         eventResp = {
-  //           isEvent: "true",
-  //           title: response.name,
-  //           description: response.description,
-  //           link: response.link
-  //         };
-  //         resolve(eventResp);
-  //       } else {
-  //         eventResp = {
-  //           isEvent: "false",
-  //           title: "false",
-  //           description: "false",
-  //           link: "false"
-  //         };
-  //         console.log("Act Now: nothing found");
-  //         resolve(eventResp);
-  //       }
-  //     }
+  //   var percentage = "94";
+  //   var link1 = "https://pornhub.com";
+  //   var link2 = "https://twitter.com";
+  //   var link3 = "https://google.com";
+  //   eventResp = {
+  //     isEvent: "true",
+  //     percentage: percentage,
+  //     link1: link1,
+  //     link2: link2,
+  //     link3: link3
   //   };
-  //   xhr.open(method, url);
-  //   xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  //   xhr.send(
-  //     JSON.stringify({
-  //       url: pageUrl
-  //     })
-  //   );
+  //   console.log(eventResp);
+  //   resolve(eventResp);
   // });
+
+  var pageUrl = pageUrl;
+  console.log("page url:", pageUrl);
+  var xhr = new XMLHttpRequest(),
+    method = "POST",
+    url = "http://127.0.0.1:5000/getcheck/";
+  return new Promise(function(resolve, reject) {
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        response = JSON.parse(xhr.responseText);
+        if (response != "none") {
+          eventResp = {
+            isEvent: "true",
+            percentage: response.percentage,
+            link1: response.link1,
+            link2: response.link2,
+            link3: response.link3
+          };
+          resolve(eventResp);
+        } else {
+          eventResp = {
+            isEvent: "true",
+            percentage: "cum",
+            link1: "cum",
+            link2: "cum",
+            link3: "cum"
+          };
+          console.log("Sage: nothing found");
+          resolve(eventResp);
+        }
+      }
+    };
+    xhr.open(method, url);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.send(
+      JSON.stringify({
+        url: pageUrl
+      })
+    );
+  });
 };
 let sendMessage = function(msg, sender, result) {
   var response = eventResp;
-  console.log("sendmessagee:", response);
   return new Promise((resolve, reject) => {
     chrome.tabs.sendMessage(contentTabId, {
       from: "background",
