@@ -16,6 +16,7 @@
   text-align: center;
 }
 .percText {
+  color: #ff3232;
   font-size: 25px;
   padding-top: 0px;
 }
@@ -61,10 +62,10 @@ p {
 
 .magAfter {
   position: absolute;
-  width: 70%;
-  margin-left: 15%;
-  margin-right: 15%;
-
+  margin-top: 4px;
+  width: 30%;
+  margin-left: 60%;
+  margin-right: 10%;
   /* margin-left: -100%; */
   pointer-events: all;
   opacity: 0;
@@ -73,10 +74,11 @@ p {
 }
 .magBefore {
   position: relative;
+  margin-top: 4px;
   pointer-events: none;
-  width: 70%;
-  margin-left: 15%;
-  margin-right: 15%;
+  width: 30%;
+  margin-left: 60%;
+  margin-right: 10%;
   transition: opacity 0.5s;
   z-index: 1;
 }
@@ -101,11 +103,16 @@ p {
   display: flex;
   align-items: center;
 }
+.borders {
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+}
+
 .percentDiv {
   width: 60px;
   height: 60px;
   text-align: center;
-  border: 2px solid white;
+  border: 2px solid #ff3232;
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
@@ -126,17 +133,36 @@ p {
 .titleText {
   font-size: 19px;
 }
+.triText {
+  font-size: 17px;
+  margin: 0px;
+  padding: 0px;
+}
 
 .genText {
   font-size: 15px;
 }
+.linkInfoLeft {
+  width: 38%;
+  margin-right: 2%;
+}
+.linkInfoRight {
+  width: 60%;
+  align-content: left;
+}
 .tri {
-  width: 29%;
+  width: 33%;
   height: 100%;
-  margin: 2%;
+  margin-top: 12px;
+  margin-bottom: 10px;
   display: flex;
   align-content: center;
   justify-content: center;
+  transition: opacity 0.5s;
+  cursor: pointer;
+}
+.tri:hover {
+  opacity: 0.7;
 }
 
 .icon {

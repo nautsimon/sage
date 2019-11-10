@@ -2,7 +2,7 @@
   "name": "Sage",
   "manifest_version": 2,
   "version": "0.0.1",
-  "description": "Facilitating social responsibility by connecting like minded individuals and to ways they may impact the real world",
+  "description": "A companion to help you navigate the modern web",
   "icons": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" },
   "content_scripts": [
     {

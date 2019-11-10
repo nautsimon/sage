@@ -2,6 +2,12 @@ var percentage;
 var link1;
 var link2;
 var link3;
+var linkTitle1;
+var linkTitle2;
+var linkTitle3;
+var linkPerc1;
+var linkPerc2;
+var linkPerc3;
 chrome.runtime.sendMessage({ from: "content" });
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
   if (msg.from == "background" && msg.event == "true") {
@@ -9,6 +15,12 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     link1 = msg.link1;
     link2 = msg.link2;
     link3 = msg.link3;
+    linkTitle1 = msg.linkTitle1;
+    linkTitle2 = msg.linkTitle2;
+    linkTitle3 = msg.linkTitle3;
+    linkPerc1 = msg.linkPerc1;
+    linkPerc2 = msg.linkPerc2;
+    linkPerc3 = msg.linkPerc3;
     const eventDiv = document.createElement("div");
     eventDiv.id = "myDivIdAct";
     eventDiv.style.position = "fixed";
@@ -40,7 +52,13 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
       percentage: percentage,
       link1: link1,
       link2: link2,
-      link3: link3
+      link3: link3,
+      linkTitle1: linkTitle1,
+      linkTitle2: linkTitle2,
+      linkTitle3: linkTitle3,
+      linkPerc1: linkPerc1,
+      linkPerc2: linkPerc2,
+      linkPerc3: linkPerc3
     });
     document.getElementById("myDivIdAct").style.bottom = "0px";
   } else {

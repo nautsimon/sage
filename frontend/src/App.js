@@ -2,8 +2,7 @@
 
 import React, { Component } from "react";
 
-import magAfter from "./imgs/magAfter.png";
-import magBefore from "./imgs/magBefore.png";
+import LinkDescription from "./LinkDescription";
 import icon from "./imgs/logoFS.png";
 import "./App.css";
 
@@ -11,10 +10,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      filter: 0,
       percentage: "",
       link1: "",
       link2: "",
-      link3: ""
+      link3: "",
+      linkTitle1: "",
+      linkTitle2: "",
+      linkTitle3: ""
     };
   }
 
@@ -31,7 +34,10 @@ class App extends Component {
               percentage: response.percentage,
               link1: response.link1,
               link2: response.link2,
-              link3: response.link3
+              link3: response.link3,
+              linkTitle1: response.linkTitle1,
+              linkTitle2: response.linkTitle2,
+              linkTitle3: response.linkTitle3
             };
             resolve(data);
           });
@@ -43,11 +49,16 @@ class App extends Component {
         percentage: data.percentage,
         link1: data.link1,
         link2: data.link2,
-        link3: data.link3
+        link3: data.link3,
+        linkTitle1: data.linkTitle1,
+        linkTitle2: data.linkTitle2,
+        linkTitle3: data.linkTitle3
       });
     });
   }
-
+  handleFilter(filterNum) {
+    this.setState({ filter: filterNum });
+  }
   render() {
     return (
       <div className="modalBody">
@@ -69,35 +80,55 @@ class App extends Component {
         </div>
         <br />
         <p className="genText negPad">
-          Here are some Sage verified articles that could provide more info on
-          this topic.
+          Here are some other articles that could provide more insight on this
+          topic.
         </p>
         <div className="row">
-          <div className="tri">
-            <div className="liDiv">
-              <a href={this.state.link1} target="_blank" className="hoverMag">
-                <img src={magAfter} className="magAfter" alt="magAfter" />
-              </a>
-              <img src={magBefore} className="magBefore" alt="magBefore" />
-            </div>
+          <div className="tri center" onClick={() => this.handleFilter(0)}>
+            <p
+              style={{
+                filter: this.state.filter === 0 ? "blur(0px)" : "blur(1px)"
+              }}
+              className="triText"
+            >
+              Insight 1
+            </p>
           </div>
-          <div className="tri">
-            <div className="liDiv">
-              <a href={this.state.link2} target="_blank" className="hoverMag">
-                <img src={magAfter} className="magAfter" alt="magAfter" />
-              </a>
-              <img src={magBefore} className="magBefore" alt="magBefore" />
-            </div>
+
+          <div
+            className="tri center borders"
+            onClick={() => this.handleFilter(1)}
+          >
+            <p
+              style={{
+                filter: this.state.filter === 1 ? "blur(0px)" : "blur(1px)"
+              }}
+              className="triText"
+            >
+              Insight 2
+            </p>
           </div>
-          <div className="tri">
-            <div className="liDiv">
-              <a href={this.state.link3} target="_blank" className="hoverMag">
-                <img src={magAfter} className="magAfter" alt="magAfter" />
-              </a>
-              <img src={magBefore} className="magBefore" alt="magBefore" />
-            </div>
+
+          <div className="tri center" onClick={() => this.handleFilter(2)}>
+            <p
+              style={{
+                filter: this.state.filter === 2 ? "blur(0px)" : "blur(1px)"
+              }}
+              className="triText"
+            >
+              Insight 3
+            </p>
           </div>
         </div>
+        <LinkDescription
+          filter={this.state.filter}
+          link1={this.state.link1}
+          link2={this.state.link2}
+          link3={this.state.link3}
+          linkTitle1={this.state.linkTitle1}
+          linkTitle2={this.state.linkTitle2}
+          linkTitle3={this.state.linkTitle3}
+        />
       </div>
     );
   }

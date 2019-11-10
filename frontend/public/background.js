@@ -34,32 +34,51 @@ let getApi = function(pageUrl) {
   //   console.log(eventResp);
   //   resolve(eventResp);
   // });
-
+  // url = "https://sage-258600.appspot.com/getcheck/"
+  // url = "http://localhost:5000/getcheck/";
+  //  linkTitle1: "cumm",
+  //             linkTitle2: "cumm",
+  //             linkTitle3: "cummcumm",
+  //             linkPerc1: "98",
+  //             linkPerc2: "91",
+  //             linkPerc3: "92"
   var pageUrl = pageUrl;
   console.log("page url:", pageUrl);
   var xhr = new XMLHttpRequest(),
     method = "POST",
-    url = "http://127.0.0.1:5000/getcheck/";
+    url = "http://localhost:5000/getcheck/";
   return new Promise(function(resolve, reject) {
     xhr.onreadystatechange = function() {
       if (xhr.readyState === 4 && xhr.status === 200) {
         response = JSON.parse(xhr.responseText);
-        if (response != "none") {
+        if (response.percentage != "fail") {
           eventResp = {
             isEvent: "true",
             percentage: response.percentage,
             link1: response.link1,
             link2: response.link2,
-            link3: response.link3
+            link3: response.link3,
+            linkTitle1: response.linkTitle1,
+            linkTitle2: response.linkTitle2,
+            linkTitle3: response.linkTitle3,
+            linkPerc1: "2",
+            linkPerc2: "2",
+            linkPerc3: "2"
           };
           resolve(eventResp);
         } else {
           eventResp = {
-            isEvent: "true",
-            percentage: "cum",
-            link1: "cum",
-            link2: "cum",
-            link3: "cum"
+            isEvent: "false",
+            percentage: "",
+            link1: "",
+            link2: "",
+            link3: "",
+            linkTitle1: "",
+            linkTitle2: "",
+            linkTitle3: "",
+            linkPerc1: "",
+            linkPerc2: "",
+            linkPerc3: ""
           };
           console.log("Sage: nothing found");
           resolve(eventResp);
@@ -84,7 +103,13 @@ let sendMessage = function(msg, sender, result) {
       event: response.isEvent,
       link1: response.link1,
       link2: response.link2,
-      link3: response.link3
+      link3: response.link3,
+      linkTitle1: response.linkTitle1,
+      linkTitle2: response.linkTitle2,
+      linkTitle3: response.linkTitle3,
+      linkPerc1: response.linkPerc1,
+      linkPerc2: response.linkPerc2,
+      linkPerc3: response.linkPerc3
     });
     resolve("message sent");
   });
