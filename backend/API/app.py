@@ -86,17 +86,17 @@ def getCheck():
         linkList = getLinks()
 
         cleanText = getText(url)
-        percentage = getPercentage(cleanText)
+        # percentage = getPercentage(cleanText)
         print(cleanText)
         print("succ")
-        return jsonify({
-            "percentage": f"{percentage}",
-            "link1": f"{linkList['link1']}",
-            "link2": f"{linkList['link2']}",
-            "link3": f"{linkList['link3']}"
+        return jsonify(
+            percentage="ssasaasas",
+            link1=linkList['link1'],
+            link2=linkList['link2'],
+            link3=linkList['link3']
             # Add this option to distinct the POST request
 
-        })
+        )
     else:
         print("fail")
         return jsonify({
@@ -112,6 +112,5 @@ def index():
 if __name__ == '__main__':
     print(("* Loading Keras model and Flask starting server..."
            "please wait until server has fully started"))
-    getModel()
-    # Threaded option to enable multiple instances for multiple user access support
-    app.run(host='0.0.0.0')
+    # getModel()
+    app.run(threaded=True, port=5000)
