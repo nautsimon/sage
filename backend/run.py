@@ -22,5 +22,5 @@ for idx,row in data.iterrows():
 data = data.append(data)
 tokenizer.fit_on_texts(data['X'].values)
 test = tokenizer.texts_to_sequences(data['X'].values)
-test = pad_sequences(test, 5014)
+test = pad_sequences(test, 10000)
 print(model.predict(test, batch_size = 2))
