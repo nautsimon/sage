@@ -77,7 +77,7 @@ def searchURL(query):
     
     return titles[index]
 
-def searchRelated(query, domain):
+def searchRelated(query, domain, count):
     
     query = urllib.parse.quote_plus(query) # Format into URL encoding
     number_result = 20
@@ -120,12 +120,12 @@ def searchRelated(query, domain):
         if ext.domain != domain:
             results.append(link_new)
             i += 1
-        if i == 3:
+        if i == count:
             break
             
     return results
 
-def simon(URL):
+def simon(URL, count):
 
     ext = tldextract.extract(URL)
     domain = ext.domain
@@ -134,7 +134,7 @@ def simon(URL):
     print(title)
     search = getSearch(title)
     print(search)
-    links = searchRelated(search, domain)
+    links = searchRelated(search, domain, count)
     
     links_cleaned = []
     websites = []
