@@ -2,13 +2,44 @@
 import urllib.request
 from bs4 import BeautifulSoup
 import re
-
 from flask import Flask, request, jsonify
+
+import pandas as pd
+import pickle
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
+from keras.models import Model, load_model
+import keras
+import tensorflow
+import sys
+if sys.version_info[0] < 3:
+    from StringIO import StringIO
+else:
+    from io import StringIO
+
 app = Flask(__name__)
 
+model = None
 
-def getPercentage():
-    return 90
+
+def getModel():
+    global model
+    model = load_model('sage.h5')
+
+
+def getPercentage(cleanText):
+    with open('tokenizer.pickle', 'rb') as handle:
+        tokenizer = pickle.load(handle)
+    TESTDATA = StringIO(cleanText)
+    data = pd.read_table(TESTDATA, names=('X'))
+    data['X'] = data['X'].apply((lambda x: re.sub('[^a-zA-z0-9\s]', '', x)))
+    for idx, row in data.iterrows():
+        row[0] = row[0].replace('rt', ' ')
+    data = data.append(data)
+    tokenizer.fit_on_texts(data['X'].values)
+    test = tokenizer.texts_to_sequences(data['X'].values)
+    test = pad_sequences(test, 5014)
+    print(model.predict(test, batch_size=2))
 
 
 def getLinks():
@@ -50,11 +81,13 @@ def getCheck():
     content = request.json
     url = content['url']
     print(url)
-    linkList = getLinks()
-    percentage = getPercentage()
-    cleanText = getText(url)
-    print(cleanText)
+
     if url:
+        linkList = getLinks()
+
+        cleanText = getText(url)
+        percentage = getPercentage(cleanText)
+        print(cleanText)
         print("succ")
         return jsonify({
             "percentage": f"{percentage}",
@@ -77,5 +110,8 @@ def index():
 
 
 if __name__ == '__main__':
+    print(("* Loading Keras model and Flask starting server..."
+           "please wait until server has fully started"))
+    getModel()
     # Threaded option to enable multiple instances for multiple user access support
-    app.run(threaded=True, port=5000)
+    app.run(host='0.0.0.0')
